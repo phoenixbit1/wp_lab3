@@ -8,8 +8,8 @@ const loginControl = (request, response) => {
         response.end();
     } else {
         if (request.session && request.session.user) {
-            response.send("Already logged in");
-            response.end();
+            response.render("loginpost",{user:"Happy time you logged in"});
+            
         } else {
             clientServices.loginService(username, password, function(err, dberr, client) {
                 console.log("Client from login service :" + JSON.stringify(client));
@@ -23,8 +23,7 @@ const loginControl = (request, response) => {
                     request.session.user = username;
                     request.session.num_client = client[0].num_client;
                     request.session.admin = false;
-                    response.send(`Login (${username}, ID.${client[0].num_client}) successful!`);
-                    response.end();
+                    response.render("loginpost",{user:"Happy time you logged in"});
                 }
             });
         }
