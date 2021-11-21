@@ -1,3 +1,4 @@
+const { Client } = require('../models/entities');
 const loginControl = (request, response) => {
     const clientServices = require('../services/clientServices');
 
@@ -14,16 +15,16 @@ const loginControl = (request, response) => {
             clientServices.loginService(username, password, function(err, dberr, client) {
                 console.log("Client from login service :" + JSON.stringify(client));
                 if (client === null) {
-                    console.log("Auhtentication problem!");
-                    response.send('login failed'); //invite to register
-                    response.end();
+                    console.log("Authentication problem!");
+                    response.render("loginpost",{user:"LOGIN FAILED!! SAD!"}); //invite to register
+                    
                 } else {
                     console.log("User from login service :" + client[0].num_client);
                     //add to session
                     request.session.user = username;
                     request.session.num_client = client[0].num_client;
                     request.session.admin = false;
-                    response.render("loginpost",{user:"Happy time you logged in"});
+                    response.render("loginpost",{user:"Happy time!!! You logged in! YES!"});
                 }
             });
         }
@@ -44,6 +45,7 @@ const registerControl = (request, response) => {
     let phone = request.body.phone;
     let fax = request.body.fax;
     let max_outstanding = request.body.max_outstanding;
+console.log(request.body)
     let client = new Client(username, password, 0, society, contact, addres, zipcode, city, phone, fax, max_outstanding);
 
     clientServices.registerService(client, function(err, exists, insertedID) {
@@ -54,7 +56,7 @@ const registerControl = (request, response) => {
         } else {
             client.num_client = insertedID;
             console.log(`Registration (${username}, ${insertedID}) successful!`);
-            response.send(`Successful registration ${client.contact} (ID.${client.num_client})!`);
+            response.render("registerpost",{user:"Happy time!!! You REGISTERED! YES!"});
         }
         response.end();
     });

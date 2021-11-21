@@ -12,7 +12,7 @@ router.get('/api/article/:id', productController.getProductByID);
 //routes for dynamic processing of clients
 //-----------------------------------------------
 //route for registration
-//router.post('/api/register', clientController.registerControl);
+router.post('/api/register', clientController.registerControl);
 //route for login
 router.post('/api/login', clientController.loginControl);
 //export router

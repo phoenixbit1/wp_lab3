@@ -41,6 +41,7 @@ function cryptPassword(pass, callback) {
             //hash the password using the generated salt
             bcrypt.hash(pass, salt, function(err, hash) {
                 if (err) {
+
                     throw err;
                 } else {
                     //console.log(`hash -> ${hash}`);
@@ -53,6 +54,7 @@ function cryptPassword(pass, callback) {
 }
 
 function createAccount(num_client, username, password, callback) {
+    
     cryptPassword(password, function(err, hash) {
         console.log(`Hash(${password}) -> ${hash}`);
         const insertAccount = (`INSERT INTO account(num_client, username, password) VALUES(${num_client}, '${username}', '${hash}');`);
@@ -73,6 +75,7 @@ function createClient(client, callback) {
     database.getResult(insertClient, function(err1, result1) {
         if (!err1) {
             //if no error insert their account
+            console.log(client)
             createAccount(result1.insertId, client.username, client.password, callback);
         } else {
             console.log(err1);

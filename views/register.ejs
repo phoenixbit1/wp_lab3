@@ -6,14 +6,22 @@
 
     <form action="/api/register" method="post">
 
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name"><br>
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username"><br>
+
+        <label for="passwsord">Password:</label>
+        <br>
+        <input type="passwsord" name="passwsord" placeholder="Password" required>
+        <br>
+        
+        <label for="contact">Contact:</label><br>
+        <input type="text" id="contact" name="contact"><br>
 
         <label for="society">Society:</label><br>
         <input type="text" id="society" name="society"><br>
 
-        <label for="address">Address:</label><br>
-        <input type="text" id="address" name="address"><br>
+        <label for="addres">Address:</label><br>
+        <input type="text" id="addres" name="addres"><br>
 
         <label for="zipcode">Zipcode:</label><br>
         <input type="number" id="zipcode" name="zipcode"><br>
@@ -26,8 +34,11 @@
 
         <label for="fax">Fax:</label><br>
         <input type="text" id="fax" name="fax"><br>
+        
+        <label for="max_outstanding">Max_Outstanding:</label><br>
+        <input type="number" id="max_outstanding" name="max_outstanding"><br>
 
-        <input type="submit" value="Submit">
+        <button type="submit">Register</button>
 
     </form>
 
